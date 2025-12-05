@@ -15,12 +15,9 @@ fun main() {
 
     val partTwo = mutableSetOf<LongRange>()
     ranges.forEach { range ->
-        if (ids.any { id -> id in range }) {
-            partTwo.add(range)
-        }
+        partTwo.add(range)
     }
 
-    partTwo
     println(partOne)
     print(mergeOverlapping(partTwo).sumOf { it.last - it.first + 1 })
 }
@@ -33,7 +30,7 @@ private fun mergeOverlapping(ranges: MutableSet<LongRange>): Set<LongRange> {
     var currentEnd = sorted.first().last
 
     for (range in sorted.drop(1)) {
-        if (range.first <= currentEnd + 1) {
+        if (range.first <= currentEnd) {
             currentEnd = maxOf(currentEnd, range.last)
         } else {
             result.add(currentStart..currentEnd)
